@@ -4,6 +4,16 @@
       "maxDuration": 30
     }
   },
+  "routes": [
+    {
+      "src": "/api/chat",
+      "dest": "/api/chat.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
   "env": {
     "REPLICATE_API_TOKEN": "@replicate_api_token"
   },
