@@ -1,0 +1,31 @@
+{
+  "name": "definit-chatbot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DefinIT - Chatbot untuk menerjemahkan dan menjelaskan istilah IT kepada mahasiswa dan pekerja IT",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "vercel dev",
+    "build": "echo 'No build step required'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "chatbot",
+    "IT",
+    "translation",
+    "education",
+    "AI"
+  ],
+  "author": "Your Name",
+  "dependencies": {
+    "replicate": "^0.34.1"
+  },
+  "devDependencies": {
+    "vercel": "^37.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
