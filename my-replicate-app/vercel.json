@@ -1,4 +1,6 @@
 {
+  "buildCommand": "",
+  "installCommand": "npm ci --omit=dev",
   "functions": {
     "api/chat.js": {
       "maxDuration": 30
