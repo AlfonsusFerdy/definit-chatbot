@@ -31,64 +31,65 @@ Jawab dalam bahasa Indonesia dengan format yang konsisten.`;
 
 export default async function handler(req, res) {
   // Set CORS headers
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   // Handle preflight requests
-  if (req.method === 'OPTIONS') {
+  if (req.method === "OPTIONS") {
     res.status(200).end();
     return;
   }
 
   // Only allow POST requests
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== "POST") {
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
     const { message } = req.body;
 
-    if (!message || message.trim() === '') {
-      return res.status(400).json({ error: 'Message is required' });
+    if (!message || message.trim() === "") {
+      return res.status(400).json({ error: "Message is required" });
     }
 
     if (!process.env.REPLICATE_API_TOKEN) {
-      return res.status(500).json({ error: 'Replicate API token not configured' });
+      return res
+        .status(500)
+        .json({ error: "Replicate API token not configured" });
     }
 
     const input = {
       messages: [
         {
           role: "system",
-          content: systemPrompt
+          content: systemPrompt,
         },
         {
           role: "user",
-          content: message
-        }
+          content: message,
+        },
       ],
       max_tokens: 500,
-      temperature: 0.7
+      temperature: 0.7,
     };
 
-    console.log('Processing request for:', message);
-    
+    console.log("Processing request for:", message);
+
     const output = await replicate.run(model, { input });
-    const response = Array.isArray(output) ? output.join('') : output;
+    const response = Array.isArray(output) ? output.join("") : output;
 
     res.status(200).json({
       success: true,
       response: response,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
-    console.error('Error processing request:', error);
+    console.error("Error processing request:", error);
     res.status(500).json({
       success: false,
-      error: 'Failed to process your request. Please try again.',
-      details: error.message
+      error: "Failed to process your request. Please try again.",
+      details: error.message,
     });
   }
 }

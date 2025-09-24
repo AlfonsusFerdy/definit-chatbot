@@ -20,7 +20,8 @@
   ],
   "author": "Your Name",
   "dependencies": {
-    "replicate": "^0.34.1"
+    "replicate": "^0.34.1",
+    "dotenv": "^16.4.1"
   },
   "devDependencies": {
     "vercel": "^37.4.0"
